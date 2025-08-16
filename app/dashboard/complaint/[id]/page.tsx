@@ -14,6 +14,10 @@ import { FileText, User, Edit, Lock, LogOut, Menu, ArrowLeft, Download, External
 import { toast } from "@/hooks/use-toast"
 import { format } from "date-fns"
 
+// Force dynamic rendering to prevent SSR issues
+export const dynamic = 'force-dynamic'
+export const revalidate = false
+
 export default function ComplaintDetail() {
   const { t } = useLanguage()
   const { user, logout, isAuthenticated } = useAuth()
@@ -306,7 +310,11 @@ export default function ComplaintDetail() {
                             <Button
                               variant="ghost"
                               size="sm"
-                              onClick={() => window.open(attachment, '_blank')}
+                              onClick={() => {
+                                if (typeof window !== 'undefined') {
+                                  window.open(attachment, '_blank')
+                                }
+                              }}
                             >
                               <ExternalLink className="w-4 h-4 mr-2" />
                               View

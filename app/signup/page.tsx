@@ -16,6 +16,10 @@ import { useAuth } from "@/lib/auth"
 import { Eye, EyeOff, Loader2 } from "lucide-react"
 import { toast } from "@/hooks/use-toast"
 
+// Force dynamic rendering to prevent SSR issues
+export const dynamic = 'force-dynamic'
+export const revalidate = false
+
 export default function SignUp() {
   const { t } = useLanguage()
   const { signup, loading } = useAuth()

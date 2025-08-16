@@ -23,6 +23,10 @@ import {
   MapPin,
 } from "lucide-react"
 
+// Force dynamic rendering to prevent SSR issues
+export const dynamic = 'force-dynamic'
+export const revalidate = false
+
 export default function AccountActivity() {
   const { t } = useLanguage()
   const { user, logout, isAuthenticated } = useAuth()
@@ -49,7 +53,7 @@ export default function AccountActivity() {
     <div className="p-4">
       <div className="mb-4 text-center">
         <div className="text-sm text-blue-200">Welcome</div>
-        <div className="font-semibold">{user?.name}</div>
+        <div className="font-semibold">{user?.user_metadata?.name || user?.email || "User"}</div>
       </div>
       <nav className="space-y-2">
         <button

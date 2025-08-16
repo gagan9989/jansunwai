@@ -16,6 +16,10 @@ import { useAuth } from "@/lib/auth"
 import { FileText, Upload, Loader2, Plus, List, User, LogOut } from "lucide-react"
 import { toast } from "@/hooks/use-toast"
 
+// Force dynamic rendering to prevent SSR issues
+export const dynamic = 'force-dynamic'
+export const revalidate = false
+
 export default function ComplaintsPage() {
   const { t } = useLanguage()
   const { user, logout, isAuthenticated } = useAuth()
@@ -92,7 +96,7 @@ export default function ComplaintsPage() {
         <div className="container mx-auto px-4 flex justify-between items-center">
           <div className="flex items-center space-x-4">
             <User className="w-5 h-5" />
-            <span>Welcome, {user.name}</span>
+            <span>Welcome, {user.user_metadata?.name || user.email}</span>
             <span className="text-blue-200">|</span>
             <span className="text-blue-200">{user.email}</span>
           </div>

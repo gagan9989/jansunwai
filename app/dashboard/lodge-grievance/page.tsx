@@ -20,6 +20,10 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { complaintsService, type ComplaintCategory, type ComplaintSubcategory } from "@/lib/complaints"
 import { Chatbot } from "@/components/chatbot"
 
+// Force dynamic rendering to prevent SSR issues
+export const dynamic = 'force-dynamic'
+export const revalidate = false
+
 export default function LodgeGrievance() {
   const { t } = useLanguage()
   const { user, logout, isAuthenticated } = useAuth()

@@ -42,6 +42,11 @@ export interface Complaint {
   created_at: string
   updated_at: string
   attachments?: string[]
+  // Extended fields from joins
+  category?: { name: string }
+  subcategory?: { name: string }
+  status?: { name: string; color: string }
+  responses?: ComplaintResponse[]
 }
 
 export interface ComplaintCategory {

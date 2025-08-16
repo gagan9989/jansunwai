@@ -14,7 +14,8 @@ import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import { Header } from "@/components/header"
 import { useAdminAuth } from "@/lib/admin-auth"
-import { adminService, type AdminDashboardStats, type Complaint } from "@/lib/admin-service"
+import { adminService, type AdminDashboardStats } from "@/lib/admin-service"
+import { type Complaint } from "@/lib/complaints"
 import { 
   BarChart3, 
   Users, 
@@ -38,6 +39,10 @@ import {
 } from "lucide-react"
 import { toast } from "@/hooks/use-toast"
 import { format } from "date-fns"
+
+// Force dynamic rendering to prevent SSR issues
+export const dynamic = 'force-dynamic'
+export const revalidate = false
 
 export default function AdminDashboard() {
   const router = useRouter()
@@ -149,12 +154,16 @@ export default function AdminDashboard() {
     try {
       const csvData = await adminService.exportComplaints()
       const blob = new Blob([csvData], { type: 'text/csv' })
-      const url = window.URL.createObjectURL(blob)
-      const a = document.createElement('a')
-      a.href = url
-      a.download = `complaints-${format(new Date(), 'yyyy-MM-dd')}.csv`
-      a.click()
-      window.URL.revokeObjectURL(url)
+      
+      // Check if we're in the browser environment
+      if (typeof window !== 'undefined') {
+        const url = window.URL.createObjectURL(blob)
+        const a = document.createElement('a')
+        a.href = url
+        a.download = `complaints-${format(new Date(), 'yyyy-MM-dd')}.csv`
+        a.click()
+        window.URL.revokeObjectURL(url)
+      }
       
       toast({
         title: "Success",

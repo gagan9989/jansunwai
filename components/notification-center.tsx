@@ -318,7 +318,7 @@ export function NotificationCenter({ userId, className }: NotificationCenterProp
                         if (!notification.is_read) {
                           markAsRead(notification.id)
                         }
-                        if (notification.action_url) {
+                        if (notification.action_url && typeof window !== 'undefined') {
                           window.location.href = notification.action_url
                         }
                       }}

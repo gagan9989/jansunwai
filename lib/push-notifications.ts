@@ -94,12 +94,15 @@ class PushNotificationService {
         event.preventDefault()
         notif.close()
         
-        // Focus on the app window
-        window.focus()
-        
-        // Navigate to specific page if data contains URL
-        if (notification.data?.url) {
-          window.location.href = notification.data.url
+        // Check if we're in the browser environment
+        if (typeof window !== 'undefined') {
+          // Focus on the app window
+          window.focus()
+          
+          // Navigate to specific page if data contains URL
+          if (notification.data?.url) {
+            window.location.href = notification.data.url
+          }
         }
       }
 
@@ -107,9 +110,11 @@ class PushNotificationService {
       notif.onactionclick = (event) => {
         const action = event.action
         if (action === 'view') {
-          window.focus()
-          if (notification.data?.url) {
-            window.location.href = notification.data.url
+          if (typeof window !== 'undefined') {
+            window.focus()
+            if (notification.data?.url) {
+              window.location.href = notification.data.url
+            }
           }
         }
       }

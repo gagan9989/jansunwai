@@ -16,6 +16,10 @@ import { useAuth } from "@/lib/auth"
 import { FileText, User, Edit, Lock, LogOut, Loader2, Menu } from "lucide-react"
 import { toast } from "@/hooks/use-toast"
 
+// Force dynamic rendering to prevent SSR issues
+export const dynamic = 'force-dynamic'
+export const revalidate = false
+
 export default function EditProfile() {
   const { t } = useLanguage()
   const { user, logout, isAuthenticated } = useAuth()
@@ -38,12 +42,13 @@ export default function EditProfile() {
       router.push("/signin")
     } else if (user) {
       // Pre-populate form with user data
-      const [firstName, lastName] = user.name.split(" ")
+      const userName = user.user_metadata?.name || user.email || ""
+      const [firstName, lastName] = userName.split(" ")
       setFormData({
         firstName: firstName || "",
         lastName: lastName || "",
         email: user.email,
-        mobile: user.mobile,
+        mobile: user.user_metadata?.phone || "",
         address: "",
         state: "",
         district: "",
@@ -93,7 +98,7 @@ export default function EditProfile() {
     <div className="p-4">
       <div className="mb-4 text-center">
         <div className="text-sm text-blue-200">Welcome</div>
-        <div className="font-semibold">{user?.name}</div>
+        <div className="font-semibold">{user?.user_metadata?.name || user?.email || "User"}</div>
       </div>
       <nav className="space-y-2">
         <button

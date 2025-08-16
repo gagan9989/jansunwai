@@ -1,14 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
-  typescript: {
-    ignoreBuildErrors: true,
-  },
-  images: {
-    unoptimized: true,
-  },
-}
+  reactStrictMode: true,
 
-export default nextConfig
+  // ✅ Force dynamic rendering (prevents SSR build-time errors)
+  output: 'standalone',
+};
+
+export default nextConfig;
