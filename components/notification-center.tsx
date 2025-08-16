@@ -73,7 +73,6 @@ export function NotificationCenter({ userId, className }: NotificationCenterProp
       toast({
         title: newNotification.title,
         description: newNotification.message,
-        duration: 5000,
       })
 
       // Send push notification if enabled

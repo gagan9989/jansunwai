@@ -37,7 +37,7 @@ class NotificationService {
       return { success: true }
     } catch (error) {
       console.error('Error creating notification:', error)
-      return { success: false, error: error.message }
+      return { success: false, error: error instanceof Error ? error.message : String(error) }
     }
   }
 
@@ -55,7 +55,7 @@ class NotificationService {
       return { data: data || [] }
     } catch (error) {
       console.error('Error fetching notifications:', error)
-      return { data: [], error: error.message }
+      return { data: [], error: error instanceof Error ? error.message : String(error) }
     }
   }
 
@@ -71,7 +71,7 @@ class NotificationService {
       return { success: true }
     } catch (error) {
       console.error('Error marking notification as read:', error)
-      return { success: false, error: error.message }
+      return { success: false, error: error instanceof Error ? error.message : String(error) }
     }
   }
 
@@ -88,7 +88,7 @@ class NotificationService {
       return { success: true }
     } catch (error) {
       console.error('Error marking all notifications as read:', error)
-      return { success: false, error: error.message }
+      return { success: false, error: error instanceof Error ? error.message : String(error) }
     }
   }
 
@@ -105,7 +105,7 @@ class NotificationService {
       return { count: count || 0 }
     } catch (error) {
       console.error('Error getting unread count:', error)
-      return { count: 0, error: error.message }
+      return { count: 0, error: error instanceof Error ? error.message : String(error) }
     }
   }
 
@@ -121,7 +121,7 @@ class NotificationService {
       return { success: true }
     } catch (error) {
       console.error('Error deleting notification:', error)
-      return { success: false, error: error.message }
+      return { success: false, error: error instanceof Error ? error.message : String(error) }
     }
   }
 

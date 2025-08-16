@@ -88,6 +88,8 @@ export const reducer = (state: State, action: any): State => {
         ...state,
         toasts: state.toasts.filter((t) => t.id !== action.toastId),
       }
+    default:
+      return state
   }
 }
 

@@ -25,7 +25,7 @@ class WhatsAppService {
       return { success: true }
     } catch (error) {
       console.error('Error sending WhatsApp message:', error)
-      return { success: false, error: error.message }
+      return { success: false, error: error instanceof Error ? error.message : String(error) }
     }
   }
 

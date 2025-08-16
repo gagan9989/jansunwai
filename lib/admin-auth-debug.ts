@@ -48,8 +48,8 @@ export const useAdminAuth = create<AdminAuthStore>()(
             set({ loading: false })
             return { 
               success: false, 
-              error: error.message,
-              debug: { step: 'auth', error: error.message }
+              error: error instanceof Error ? error.message : String(error),
+              debug: { step: 'auth', error: error instanceof Error ? error.message : String(error) }
             }
           }
 

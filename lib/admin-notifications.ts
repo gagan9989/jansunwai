@@ -45,7 +45,8 @@ class AdminNotificationService {
         type: data.type,
         category: data.category,
         complaint_id: data.complaintId.toString(),
-        action_url: `/dashboard/complaint/${data.complaintId}`
+        action_url: `/dashboard/complaint/${data.complaintId}`,
+        is_read: false
       })
 
       if (!notificationResult.success) {
@@ -95,7 +96,7 @@ class AdminNotificationService {
       return { success: true }
     } catch (error) {
       console.error('Error sending comprehensive notification:', error)
-      return { success: false, error: error.message }
+      return { success: false, error: error instanceof Error ? error.message : String(error) }
     }
   }
 
@@ -216,7 +217,8 @@ class AdminNotificationService {
           message,
           type,
           category,
-          action_url: '/dashboard'
+          action_url: '/dashboard',
+          is_read: false
         })
 
         if (result.success) {
@@ -225,7 +227,7 @@ class AdminNotificationService {
           errors.push(`Failed to send to user ${userId}: ${result.error}`)
         }
       } catch (error) {
-        errors.push(`Error sending to user ${userId}: ${error.message}`)
+        errors.push(`Error sending to user ${userId}: ${error instanceof Error ? error.message : String(error)}`)
       }
     }
 
@@ -260,7 +262,7 @@ class AdminNotificationService {
       return this.sendBulkNotification(userIds, title, message, type, 'general')
     } catch (error) {
       console.error('Error sending system announcement:', error)
-      return { success: false, error: error.message, sentCount: 0 }
+      return { success: false, error: error instanceof Error ? error.message : String(error), sentCount: 0 }
     }
   }
 }

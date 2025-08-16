@@ -18,7 +18,6 @@ import { toast } from "@/hooks/use-toast"
 
 // Force dynamic rendering to prevent SSR issues
 export const dynamic = 'force-dynamic'
-export const revalidate = false
 
 export default function EditProfile() {
   const { t } = useLanguage()
@@ -47,7 +46,7 @@ export default function EditProfile() {
       setFormData({
         firstName: firstName || "",
         lastName: lastName || "",
-        email: user.email,
+        email: user.email || "",
         mobile: user.user_metadata?.phone || "",
         address: "",
         state: "",

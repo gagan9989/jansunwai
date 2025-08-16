@@ -50,7 +50,7 @@ class PushNotificationService {
       }
     } catch (error) {
       console.error('Error requesting notification permission:', error)
-      return { granted: false, error: error.message }
+      return { granted: false, error: error instanceof Error ? error.message : String(error) }
     }
   }
 
@@ -79,10 +79,8 @@ class PushNotificationService {
         body: notification.body,
         icon: notification.icon || '/government-logo.jpg',
         badge: notification.badge || '/government-logo.jpg',
-        image: notification.image,
         tag: notification.tag,
         data: notification.data,
-        actions: notification.actions,
         requireInteraction: notification.requireInteraction || false,
         silent: notification.silent || false
       }
@@ -106,15 +104,12 @@ class PushNotificationService {
         }
       }
 
-      // Handle notification action clicks
-      notif.onactionclick = (event) => {
-        const action = event.action
-        if (action === 'view') {
-          if (typeof window !== 'undefined') {
-            window.focus()
-            if (notification.data?.url) {
-              window.location.href = notification.data.url
-            }
+      // Handle notification clicks
+      notif.onclick = () => {
+        if (typeof window !== 'undefined') {
+          window.focus()
+          if (notification.data?.url) {
+            window.location.href = notification.data.url
           }
         }
       }
@@ -122,7 +117,7 @@ class PushNotificationService {
       return { success: true }
     } catch (error) {
       console.error('Error sending notification:', error)
-      return { success: false, error: error.message }
+      return { success: false, error: error instanceof Error ? error.message : String(error) }
     }
   }
 

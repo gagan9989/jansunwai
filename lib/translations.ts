@@ -121,7 +121,7 @@ export const translations = {
     no: "No",
 
     // New Lodge Grievance Fields
-    selectLanguage: "Select Language",
+    selectGrievanceLanguage: "Select Language",
     selectCity: "Select City",
     selectComplaintType: "Select Complaint Type",
     selectComplaintSubtype: "Select Complaint Subtype",
@@ -131,14 +131,14 @@ export const translations = {
     zoneWardNo: "Zone No. / Ward No.",
     city: "City",
     area: "Area",
-    pincode: "Pincode",
-    middleName: "Middle Name",
+    grievancePincode: "Pincode",
+    grievanceMiddleName: "Middle Name",
     sameAsAbove: "Same as above",
     landmark: "Landmark",
     country: "Country",
     telephoneOff: "Telephone (Off.)",
     telephoneRes: "Telephone (Res.)",
-    emailAddress: "E-Mail Address",
+    grievanceEmailAddress: "E-Mail Address",
     uploadDocuments: "Upload Documents",
   },
   hi: {
@@ -263,7 +263,7 @@ export const translations = {
     no: "नहीं",
 
     // New Lodge Grievance Fields
-    selectLanguage: "भाषा चुनें",
+    selectGrievanceLanguage: "भाषा चुनें",
     selectCity: "शहर चुनें",
     selectComplaintType: "शिकायत का प्रकार चुनें",
     selectComplaintSubtype: "शिकायत का उपप्रकार चुनें",
@@ -273,14 +273,14 @@ export const translations = {
     zoneWardNo: "जोन नंबर / वार्ड नंबर",
     city: "शहर",
     area: "क्षेत्र",
-    pincode: "पिन कोड",
-    middleName: "मध्य नाम",
+    grievancePincode: "पिन कोड",
+    grievanceMiddleName: "मध्य नाम",
     sameAsAbove: "ऊपर जैसा ही",
     landmark: "लैंडमार्क",
     country: "देश",
     telephoneOff: "टेलीफोन (कार्यालय)",
     telephoneRes: "टेलीफोन (निवास)",
-    emailAddress: "ई-मेल पता",
+    grievanceEmailAddress: "ई-मेल पता",
     uploadDocuments: "दस्तावेज़ अपलोड करें",
   },
 }

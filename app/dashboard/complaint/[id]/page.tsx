@@ -16,7 +16,6 @@ import { format } from "date-fns"
 
 // Force dynamic rendering to prevent SSR issues
 export const dynamic = 'force-dynamic'
-export const revalidate = false
 
 export default function ComplaintDetail() {
   const { t } = useLanguage()

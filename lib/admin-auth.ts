@@ -41,7 +41,7 @@ export const useAdminAuth = create<AdminAuthStore>()(
 
           if (error) {
             set({ loading: false })
-            return { success: false, error: error.message }
+            return { success: false, error: error instanceof Error ? error.message : String(error) }
           }
 
           if (data.user) {
